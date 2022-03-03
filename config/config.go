@@ -55,10 +55,10 @@ func Get(key string, defaultValue ...interface{}) interface{} {
     var maps configMap = &configMaps
     for i, k := range keys {
         if val, ok := maps.Load(k); ok {
-            if m, ok := val.(map[string]interface{}); ok {
-                maps = StrMap(m)
-            } else if i == lastIndex {
+            if i == lastIndex {
                 return val
+            } else if m, ok := val.(map[string]interface{}); ok {
+                maps = StrMap(m)
             }
         }
     }
